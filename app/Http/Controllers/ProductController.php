@@ -48,7 +48,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->update($request->all());
+
+        return $product;
     }
 
     /**
@@ -56,6 +60,15 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Product::destroy($id);
     }
+
+    /**
+     * serach for fields with macthes properties in the database
+     */
+    public function search($name)
+    {
+        return Product::where('name', 'like', '%'.$name.'%' )->get();
+    }
+
 }
